@@ -2,11 +2,11 @@ import pandas as pd
 import numpy as np
 
 class GroupEstimate:
-    
+
     def __init__(self, estimate="mean"):
         if estimate not in ["mean", "median"]:
             raise ValueError("estimate must be 'mean' or 'median'")
-        
+
         self.estimate = estimate
         self.group_values = None
         self.columns = None
@@ -27,11 +27,10 @@ class GroupEstimate:
 
         self.group_values = grouped
 
-def predict(self, X_):
-    if not isinstance(X_, pd.DataFrame):
-        X_ = pd.DataFrame(X_, columns=self.columns)
+    def predict(self, X_):
+        if not isinstance(X_, pd.DataFrame):
+            X_ = pd.DataFrame(X_, columns=self.columns)
 
-<<<<<<< HEAD
         results = []
         missing_count = 0
     for _, row in X_.iterrows():
@@ -42,21 +41,29 @@ def predict(self, X_):
     else:
         results.append(np.nan)
         missing_count += 1
-=======
+
     results = []
     missing_count = 0
 
-    for _, row in X_.iterrows():
-        key = tuple(row[col] for col in self.columns)
+        results = []
+        missing_count = 0
+
+        for _, row in X_.iterrows():
+            key = tuple(row[col] for col in self.columns)
 
         if key in self.group_values.index:
             results.append(self.group_values.loc[key])
         else:
             results.append(np.nan)
             missing_count += 1
->>>>>>> 0ae897e (Fix indentation error)
 
-    if missing_count > 0:
-        print(f"{missing_count} missing group(s) encountered.")
+            if key in self.group_values.index:
+                results.append(self.group_values.loc[key])
+            else:
+                results.append(np.nan)
+                missing_count += 1
 
-    return np.array(results)
+        if missing_count > 0:
+            print(f"{missing_count} missing group(s) encountered.")
+
+        return np.array(results)
