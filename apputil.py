@@ -33,29 +33,9 @@ class GroupEstimate:
 
         results = []
         missing_count = 0
-    for _, row in X_.iterrows():
-        key = tuple(row[col] for col in self.columns)
-
-    if key in self.group_values.index:
-        results.append(self.group_values.loc[key])
-    else:
-        results.append(np.nan)
-        missing_count += 1
-
-    results = []
-    missing_count = 0
-
-        results = []
-        missing_count = 0
 
         for _, row in X_.iterrows():
             key = tuple(row[col] for col in self.columns)
-
-        if key in self.group_values.index:
-            results.append(self.group_values.loc[key])
-        else:
-            results.append(np.nan)
-            missing_count += 1
 
             if key in self.group_values.index:
                 results.append(self.group_values.loc[key])
