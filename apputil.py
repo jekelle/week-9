@@ -27,10 +27,11 @@ class GroupEstimate:
 
         self.group_values = grouped
 
-    def predict(self, X_):
-        if not isinstance(X_, pd.DataFrame):
-            X_ = pd.DataFrame(X_, columns=self.columns)
+def predict(self, X_):
+    if not isinstance(X_, pd.DataFrame):
+        X_ = pd.DataFrame(X_, columns=self.columns)
 
+<<<<<<< HEAD
         results = []
         missing_count = 0
     for _, row in X_.iterrows():
@@ -41,8 +42,21 @@ class GroupEstimate:
     else:
         results.append(np.nan)
         missing_count += 1
+=======
+    results = []
+    missing_count = 0
 
-        if missing_count > 0:
-            print(f"{missing_count} missing group(s) encountered.")
+    for _, row in X_.iterrows():
+        key = tuple(row[col] for col in self.columns)
 
-        return np.array(results)
+        if key in self.group_values.index:
+            results.append(self.group_values.loc[key])
+        else:
+            results.append(np.nan)
+            missing_count += 1
+>>>>>>> 0ae897e (Fix indentation error)
+
+    if missing_count > 0:
+        print(f"{missing_count} missing group(s) encountered.")
+
+    return np.array(results)
